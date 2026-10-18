@@ -1,0 +1,62 @@
+{% extends "Administrador/index.html" %}
+{% load static %}
+
+{% block title %}
+    Buscar Libros - BIBLIOTECA SaBré
+{% endblock title %}
+
+{% block codigoDinamico %}
+
+<main class="main-content">
+
+    <section class="products-section">
+
+        <div class="products-header">
+
+            <h1 class="section-title uppercase tracking-wider">
+                BUSCAR LIBROS
+            </h1>
+
+        </div>
+
+        <div class="table-container">
+
+            <form method="GET">
+
+                <label for="buscar">
+                    Título del Libro
+                </label>
+
+                <input
+                    type="text"
+                    id="buscar"
+                    name="buscar"
+                    placeholder="Ingrese el título del libro"
+                >
+
+                <button type="submit" class="btn-nuevo-libro">
+                    Buscar
+                </button>
+
+            </form>
+            {% if libros %}
+                <h2>Libros encontrados</h2>
+
+                {% for libro in libros %}
+                    <div>
+                        <strong>{{ libro.titulo_libro }}</strong>
+                        - {{ libro.autor }} ({{ libro.anio }})
+                    </div>
+                {% endfor %}
+
+            {% elif request.GET.buscar %}
+    <p>No se encontró ningún libro con ese título.</p>
+{% endif %}
+
+        </div>
+
+    </section>
+
+</main>
+
+{% endblock codigoDinamico %}

@@ -1,0 +1,131 @@
+
+{% extends "Administrador/index.html" %}
+{% load static %}
+
+{% block title %}
+    Préstamos - BIBLIOTECA SaBré
+{% endblock title %}
+
+{% block codigoDinamico %}
+
+<main class="main-content">
+
+    <section class="products-section">
+
+        {% if error_fechas %}
+            <div class="alerta-error-fechas">
+                ERROR DE FECHAS
+            </div>
+        {% endif %}
+
+        <div class="products-header">
+
+            <h1 class="section-title uppercase tracking-wider">
+                Préstamos
+            </h1>
+
+            <div class="products-actions">
+                <a href="{% url 'crear_prestamos' %}" class="btn-nuevo-libro">
+                    + Nuevo Préstamo
+                </a>
+            </div>
+
+        </div>
+
+        <div class="table-container">
+
+            <table class="products-table">
+
+                <thead>
+                    <tr>
+                        <th class="th-id">ID</th>
+                        <th>Usuario</th>
+                        <th>Libro</th>
+                        <th>Fecha del Préstamo</th>
+                        <th>Fecha de Devolución Prevista</th>
+                        <th>Devolución Real</th>
+                        <th class="th-acciones">Acciones</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                    {% for p in prestamos %}
+
+                    <tr class="{% if p.error_fechas %}fila-error-fechas{% endif %}">
+
+                        <td class="td-id">
+                            {{ forloop.counter }}
+                        </td>
+
+                        <td>
+                            {{ p.usuario.nombre_usuario }}
+                        </td>
+
+                        <td class="td-nombre">
+                            {{ p.libro.titulo_libro }}
+                        </td>
+
+                        <td>
+                            {{ p.fecha_prestamo|date:"d/m/Y" }}
+                        </td>
+
+                        <td>
+                            {% if p.fecha_devolucion_prevista %}
+                                {{ p.fecha_devolucion_prevista|date:"d/m/Y" }}
+                            {% else %}
+                                Sin fecha prevista
+                            {% endif %}
+                        </td>
+
+                        <td>
+                            {% if p.devolucion_registrada %}
+                                {{ p.fecha_devolucion_real|date:"d/m/Y" }}
+                            {% else %}
+                                Pendiente de devolución
+                            {% endif %}
+                        </td>
+
+                        <td class="td-acciones">
+                            <div class="action-buttons-group">
+
+                                <a href="{% url 'editar_prestamo' p.id %}" class="btn-editar">
+                                    Editar
+                                </a>
+
+                                <a href="{% url 'eliminar_prestamo' p.id %}" class="btn-eliminar">
+                                    Eliminar
+                                </a>
+
+                                {% if not p.devolucion_registrada %}
+                                    <a href="{% url 'registrar_devolucion' p.id %}" class="btn-editar btn-registrar-devolucion">
+                                        Registrar devolución
+                                    </a>
+                                {% endif %}
+
+                            </div>
+                        </td>
+
+                    </tr>
+
+                    {% empty %}
+
+                    <tr>
+                        <td colspan="7">
+                            No hay préstamos registrados.
+                        </td>
+                    </tr>
+
+                    {% endfor %}
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </section>
+
+</main>
+
+{% endblock codigoDinamico %}

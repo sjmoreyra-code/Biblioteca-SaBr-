@@ -1,0 +1,74 @@
+{% extends 'Administrador/index.html' %}
+
+{% block title %}
+Accesibilidad - BIBLIOTECA SaBré
+{% endblock title %}
+
+{% block codigoDinamico %}
+
+<main class="main-content">
+
+    <section class="services-section accesibilidad-section">
+        <h1 class="section-title">
+            Accesibilidad
+        </h1>
+
+        <p class="hero-description">
+            Elegí el tipo de acceso que necesitás para utilizar
+            los servicios de la Biblioteca SaBré.
+        </p>
+
+        <div class="services-grid">
+
+            <!-- Acceso de usuario -->
+            <div class="service-card">
+                <div class="service-icon-box">
+                    <span class="material-symbols-outlined">
+                        person
+                    </span>
+                </div>
+
+                <h2 class="service-card-title">
+                    Usuario
+                </h2>
+
+                <p class="service-card-text">
+                    Accedé a las funcionalidades de la biblioteca
+                    y realizá tu registro como lector.
+                </p>
+
+                <a href="{% url 'usuario_login' %}"
+                   class="btn-nuevo-libro">
+                    Ingresar como usuario
+                </a>
+            </div>
+
+            <!-- Acceso de administrador -->
+            <div class="service-card">
+                <div class="service-icon-box">
+                    <span class="material-symbols-outlined">
+                        admin_panel_settings
+                    </span>
+                </div>
+
+                <h2 class="service-card-title">
+                    Administrador
+                </h2>
+
+                <p class="service-card-text">
+                    Accedé al panel de gestión de la
+                    Biblioteca SaBré.
+                </p>
+
+                <a href="/admin/"
+                   class="btn-nuevo-libro">
+                    Ingresar como administrador
+                </a>
+            </div>
+
+        </div>
+    </section>
+
+</main>
+
+{% endblock codigoDinamico %}

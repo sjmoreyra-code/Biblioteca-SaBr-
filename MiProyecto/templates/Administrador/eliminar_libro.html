@@ -1,0 +1,49 @@
+{% extends "Administrador/index.html" %}
+{% load static %}
+
+{% block title %}
+    Eliminar Libro - BIBLIOTECA SaBré
+{% endblock title %}
+
+{% block codigoDinamico %}
+
+<main class="main-content">
+
+    <section class="products-section">
+
+        <div class="products-header">
+
+            <h1 class="section-title uppercase tracking-wider">
+                ELIMINAR LIBRO
+            </h1>
+
+        </div>
+
+        <div class="table-container">
+
+            <p>
+                ¿Está seguro de que desea eliminar el libro
+                <strong>{{ libro.titulo_libro }}</strong>?
+            </p>
+
+            <form method="POST">
+
+                {% csrf_token %}
+
+                <button type="submit" class="btn-eliminar">
+                    Sí, eliminar libro
+                </button>
+
+                <a href="{% url 'libros' %}" class="btn-editar">
+                    Cancelar
+                </a>
+
+            </form>
+
+        </div>
+
+    </section>
+
+</main>
+
+{% endblock codigoDinamico %}

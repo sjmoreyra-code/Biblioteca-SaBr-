@@ -1,0 +1,63 @@
+{% extends "Administrador/index.html" %}
+{% load static %}
+
+{% block title %}
+    Eliminar Préstamo - BIBLIOTECA SaBré
+{% endblock title %}
+
+{% block codigoDinamico %}
+
+<main class="main-content">
+
+    <section class="products-section">
+
+        <div class="products-header">
+
+            <h1 class="section-title uppercase tracking-wider">
+                Eliminar Préstamo
+            </h1>
+
+        </div>
+
+        <div class="table-container">
+
+            <p>
+                ¿Estás segura de que querés eliminar este préstamo?
+            </p>
+
+            <p>
+                <strong>Usuario:</strong>
+                {{ prestamo.usuario.nombre_usuario }}
+            </p>
+
+            <p>
+                <strong>Libro:</strong>
+                {{ prestamo.libro.titulo_libro }}
+            </p>
+
+            <p>
+                <strong>Fecha del préstamo:</strong>
+                {{ prestamo.fecha_prestamo|date:"d/m/Y" }}
+            </p>
+
+            <form method="POST">
+
+                {% csrf_token %}
+
+                <button type="submit" class="btn-eliminar">
+                    Sí, eliminar préstamo
+                </button>
+
+                <a href="{% url 'prestamos' %}" class="btn-editar">
+                    Cancelar
+                </a>
+
+            </form>
+
+        </div>
+
+    </section>
+
+</main>
+
+{% endblock codigoDinamico %}

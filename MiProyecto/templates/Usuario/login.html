@@ -1,0 +1,145 @@
+
+{% load static %}
+<!DOCTYPE html>
+<html class="dark" lang="es">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Iniciar sesión - Biblioteca SaBré</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="{% static 'Usuario/main.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'Usuario/style.css' %}">
+</head>
+
+<body class="bg-surface font-body-base text-on-surface antialiased min-h-screen">
+
+    <header class="fixed top-0 w-full z-50 bg-surface-container-lowest/90 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.4)]">
+        <div class="h-16 px-4 md:px-8 flex items-center justify-between">
+            <a href="{% url 'usuario_index' %}" class="flex flex-col">
+                <span class="text-primary-container uppercase tracking-tight font-black text-lg md:text-xl">
+                    BIBLIOTECA SaBré
+                </span>
+                <span class="text-on-surface-variant uppercase tracking-wider text-xs">
+                    Acceso de usuario
+                </span>
+            </a>
+
+            <span class="material-symbols-outlined text-primary-container text-3xl">account_circle</span>
+        </div>
+    </header>
+
+    <main class="min-h-screen flex flex-col items-center justify-center px-4 pt-24 pb-12">
+
+        <section class="w-full max-w-md bg-surface-container rounded-xl p-6 md:p-8 shadow-md border border-surface-container-high">
+
+            <div class="flex flex-col items-center text-center gap-3 mb-7">
+                <div class="w-16 h-16 rounded-full bg-primary-container flex items-center justify-center text-on-primary">
+                    <span class="material-symbols-outlined text-4xl">lock</span>
+                </div>
+
+                <span class="text-primary-container uppercase tracking-widest text-xs font-bold">
+                    Tu espacio personal
+                </span>
+
+                <h1 class="text-primary text-2xl md:text-3xl font-black uppercase tracking-tight">
+                    Iniciar sesión
+                </h1>
+
+                <p class="text-on-surface-variant text-sm leading-relaxed">
+                    Ingresá a tu cuenta para acceder a los servicios de Biblioteca SaBré.
+                </p>
+            </div>
+
+            {% if messages %}
+                <div class="flex flex-col gap-2 mb-5" aria-live="polite">
+                    {% for message in messages %}
+                        <div class="rounded-lg p-3 text-sm
+                            {% if message.tags == 'error' %}
+                                bg-red-950 text-red-200 border border-red-800
+                            {% else %}
+                                bg-surface-container-high text-primary border border-primary-container
+                            {% endif %}">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+
+            <form method="post" class="flex flex-col gap-5">
+                {% csrf_token %}
+
+                <div class="flex flex-col gap-2">
+                    <label for="username" class="text-primary text-sm font-bold">
+                        Nombre de usuario
+                    </label>
+
+                    <input
+                        type="text"
+                        id="username"
+                        name="username"
+                        autocomplete="username"
+                        required
+                        autofocus
+                        class="w-full min-h-12 rounded-lg bg-surface-container-lowest border border-surface-container-highest px-4 py-3 text-primary focus:outline-none focus:ring-2 focus:ring-primary-container"
+                        placeholder="Ingresá tu usuario">
+                </div>
+
+                <div class="flex flex-col gap-2">
+                    <label for="password" class="text-primary text-sm font-bold">
+                        Contraseña
+                    </label>
+
+                    <input
+                        type="password"
+                        id="password"
+                        name="password"
+                        autocomplete="current-password"
+                        required
+                        class="w-full min-h-12 rounded-lg bg-surface-container-lowest border border-surface-container-highest px-4 py-3 text-primary focus:outline-none focus:ring-2 focus:ring-primary-container"
+                        placeholder="Ingresá tu contraseña">
+                </div>
+
+                <button
+                    type="submit"
+                    class="w-full min-h-12 rounded-lg bg-primary-container hover:bg-primary text-on-primary font-bold uppercase tracking-wider flex items-center justify-center gap-2 transition-colors focus:outline-none focus:ring-2 focus:ring-primary-container">
+                    <span class="material-symbols-outlined">login</span>
+                    Ingresar
+                </button>
+            </form>
+
+            <div class="mt-6 text-center">
+                <p class="text-on-surface-variant text-sm">
+                    ¿Todavía no tenés una cuenta?
+                </p>
+
+                <a
+                    href="{% url 'usuario_registro' %}"
+                    class="inline-flex items-center justify-center mt-3 min-h-12 w-full rounded-lg border border-primary-container text-primary-container hover:bg-surface-container-high font-bold uppercase text-sm tracking-wide transition-colors">
+                    Crear una cuenta
+                </a>
+            </div>
+
+            <div class="mt-6 pt-5 border-t border-surface-container-high text-center">
+                <a href="/">
+                    <class="inline-flex items-center gap-2 text-on-surface-variant hover:text-primary text-sm transition-colors">
+                    <span class="material-symbols-outlined text-lg">arrow_back</span>
+                    Volver al inicio
+                </a>
+            </div>
+
+        </section>
+
+        <p class="mt-6 text-center text-on-surface-variant text-xs">
+            Biblioteca Popular SaBré · Cultura accesible para todos.
+        </p>
+
+    </main>
+
+</body>
+</html>

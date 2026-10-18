@@ -1,0 +1,259 @@
+{% load static %}
+<!DOCTYPE html>
+<html class="dark" lang="es">
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>
+        {% block title %}
+            BIBLIOTECA SaBré - Acceso Total
+        {% endblock title %}
+    </title>
+    <!-- Fuentes e Iconos de Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:wght@400;500;700;800&amp;display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+    <!-- Estilos locales de Django Staticfiles -->
+    <link rel="stylesheet" href="{% static 'Administrador/style.css' %}">
+</head>
+<body class="bg-background text-on-background min-h-screen flex flex-col font-body-lg">
+
+    <!-- Header -->
+    <header class="header-main">
+        <nav aria-label="Main Navigation" class="nav-container">
+            <a class="logo-title" href= "{% url 'index' %}">
+                BIBLIOTECA SaBré
+            </a>
+            <div class="nav-links">
+                <a class="nav-link" href="{% url 'quienes_somos' %}">Quiénes somos</a>
+                <a class="nav-link" href="{% url 'prestamos' %}">Préstamos de Libros</a>
+                <a class="nav-link" href="#">Audio Libro</a>
+                <a class="nav-link" href="#">Braile</a>
+                <a class="nav-link" href="#">Talleres</a>
+                <a class="nav-link" href="#">Informática</a>
+                <a class="nav-link" href="{% url 'libros' %}">Libros</a>
+                <a class="nav-link" href="{% url 'registro' %}">Registrarse</a>
+            </div>
+            <div class="header-actions">
+                <button aria-label="Buscar" class="btn-search-icon" type="button">
+                    <span aria-hidden="true" class="material-symbols-outlined icon-fill">search</span>
+                </button>
+                <a href="{% url 'accesibilidad' %}" class="btn-accessibility">
+                Accesibilidad
+                </a>
+            </div>
+        </nav>
+    </header>
+
+    
+    
+    {% if messages %}
+        <div class="notificaciones-container" aria-live="polite" aria-atomic="true">
+            {% for message in messages %}
+                <div class="notificacion {{ message.tags }}" role="status">
+                    <span class="notificacion-icono" aria-hidden="true">✓</span>
+                    <span>{{ message }}</span>
+                    <button type="button"
+                            class="notificacion-cerrar"
+                            aria-label="Cerrar notificación"
+                            onclick="this.parentElement.remove()">
+                        ×
+                    </button>
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+
+    {% block codigoDinamico %}
+
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Hero Section -->
+        <div class="ayudante-wrapper">
+            <button class="btn-ayudante" type="button">AYUDANTE de Biblioteca</button>
+        </div>
+
+        <section class="hero-section">
+            <div class="hero-text-container">
+                <h1 class="hero-title">
+                    ACCESO TOTAL A LA CULTURA
+                </h1>
+                <p class="hero-description">
+                    Una biblioteca diseñada sin barreras. Descubre nuestro vasto catálogo de recursos accesibles, desde audiolibros hasta textos en braille, en un entorno pensado para todos.
+                </p>
+                <button class="btn-hero" type="button">
+                    Explorar Catálogo
+                </button>
+            </div>
+            <div class="hero-image-container">
+                <img alt="Ilustración abstracta de lectura accesible" class="hero-image" data-alt="A high contrast, minimalist brutalist illustration representing an open book transforming into a sound wave, rendered in pure bright yellow against a deep black background. The style is geometric and bold, designed for extreme visual clarity and accessibility." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA3iHyjUQA0SDdR4mn1C1mrFXV2A23mLMg5mrK7A5sQeIu6by-gpaTbNsgIwAHAuW48Nyn0n90jiyLjwd6Uv-LuFd-BRP0d-sN9lFzKsdKs90rG7pZavfoC4Ej1YwKiyrSiDT11KGTnlOrDeYTZv_RFb_HfkJ4VsErVDsCSm_jLbbQ1Xz43IuJNBHoqxkS-Pt_e-ttwa4RQasKYfPa-watvlvq-4dX96XFfgTdHCKF4XcHUJuk_7QfQ">
+            </div>
+        </section>
+
+        <!-- Services Grid -->
+        <section class="services-section">
+            <h2 class="section-title">
+                Nuestros Servicios
+            </h2>
+            <div class="services-grid">
+                <!-- Card 1 -->
+                <a class="service-card group" href="#">
+                    <div class="service-icon-box">
+                        <span aria-hidden="true" class="material-symbols-outlined icon-fill">menu_book</span>
+                    </div>
+                    <h3 class="service-card-title">Préstamos</h3>
+                    <p class="service-card-text">Libros en macrocaracteres y formatos adaptados para baja visión.</p>
+                </a>
+                <!-- Card 2 -->
+                <a class="service-card group" href="#">
+                    <div class="service-icon-box">
+                        <span aria-hidden="true" class="material-symbols-outlined icon-fill">headphones</span>
+                    </div>
+                    <h3 class="service-card-title">Audio</h3>
+                    <p class="service-card-text">Extensa colección de audiolibros con reproductores accesibles.</p>
+                </a>
+                <!-- Card 3 -->
+                <a class="service-card group" href="#">
+                    <div class="service-icon-box">
+                        <span aria-hidden="true" class="material-symbols-outlined icon-fill">touch_app</span>
+                    </div>
+                    <h3 class="service-card-title">Braile</h3>
+                    <p class="service-card-text">Literatura, revistas y documentos impresos en sistema braille.</p>
+                </a>
+                <!-- Card 4 -->
+                <a class="service-card group" href="#">
+                    <div class="service-icon-box">
+                        <span aria-hidden="true" class="material-symbols-outlined icon-fill">groups</span>
+                    </div>
+                    <h3 class="service-card-title">Talleres</h3>
+                    <p class="service-card-text">Actividades formativas y culturales diseñadas inclusivamente.</p>
+                </a>
+                <!-- Card 5 -->
+                <a class="service-card group" href="#">
+                    <div class="service-icon-box">
+                        <span aria-hidden="true" class="material-symbols-outlined icon-fill">computer</span>
+                    </div>
+                    <h3 class="service-card-title">Informática</h3>
+                    <p class="service-card-text">Puestos con lectores de pantalla y magnificadores instalados.</p>
+                </a>
+            </div>
+        </section>
+
+        <!-- Products Section & Table -->
+        <section aria-labelledby="libros-heading" class="products-section">
+            <div class="products-header">
+                <h2 class="section-title uppercase tracking-wider" id="libros-heading">
+                    Nuestros Libros
+                </h2>
+                <div class="products-actions">
+                    <a href="{% url 'crear_libros' %}" class="btn-nuevo-libro">
+                        + Nuevo Libro
+                    </a>
+                    <a href="{% url 'buscar_libros' %}" class="btn-buscar-libros">
+                        <span aria-hidden="true" class="material-symbols-outlined">search</span>
+                        Buscar
+                    </a>
+                </div>
+            </div>
+
+            <!-- Table Container -->
+            <div class="table-container">
+                <table class="products-table">
+                    <thead>
+                        <tr>
+                            <th class="th-id" scope="col">ID</th>
+                            <th scope="col">Título del Libro</th>
+                            <th scope="col">Autor</th>
+                            <th scope="col">Disponibilidad</th>
+                            <th class="th-acciones" scope="col">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+    {% for p in libros %}
+
+    <tr>
+
+        <td class="td-id">
+            {{ forloop.counter }}
+        </td>
+
+        <td class="td-nombre">
+            {{ p.titulo_libro }}
+        </td>
+
+        <td>
+            {{ p.autor }} ({{ p.anio }})
+        </td>
+
+        <td>
+            {% if p.disponibilidad %}
+                Disponible
+            {% else %}
+                No disponible
+            {% endif %}
+        </td>
+
+
+
+        <td class="td-acciones">
+
+            <div class="action-buttons-group">
+                <a href="{% url 'editar_libro' p.id %}" class="btn-editar">
+                    Editar
+                </a>
+
+                <a href="{% url 'eliminar_libro' p.id %}" class="btn-eliminar">
+                    Eliminar
+                </a>
+</div>
+        </td>
+
+    </tr>
+
+    {% empty %}
+
+    <tr>
+        <td colspan="5">
+            No hay libros disponibles.
+        </td>
+    </tr>
+
+    {% endfor %}
+    </tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+{% endblock codigoDinamico %}
+
+    <!-- Footer -->
+    <footer class="footer-main">
+        <div class="footer-container">
+            <div class="footer-copyright">© 2024 BIBLIOTECA SABRÉ - ACCESO UNIVERSAL</div>
+            <nav aria-label="Footer Links" class="footer-nav">
+                <a class="footer-link" href="#">Privacidad</a>
+                <a class="footer-link" href="#">Contacto</a>
+                <a class="footer-link" href="#">Soporte Técnico</a>
+            </nav>
+        </div>
+    </footer>
+
+    <!-- JavaScript de Django Staticfiles -->
+    
+<script>
+    document.querySelectorAll('.notificacion').forEach((notificacion) => {
+        setTimeout(() => {
+            notificacion.classList.add('ocultando');
+
+            setTimeout(() => {
+                notificacion.remove();
+            }, 400);
+        }, 4000);
+    });
+</script>
+
+<script src="{% static 'Administrador/main.js' %}"></script>
+</body>
+</html>
